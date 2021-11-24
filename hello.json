@@ -1,0 +1,27 @@
+{
+  "victims": [
+    {
+      "name": "Alain Terieur",
+      "mailAdress": "AlainTerieur@gmail.com"
+    },
+    {
+      "name": "Alex Terieur",
+      "mailAdress": "AlexTerieur@gmail.com"
+    },
+    {
+      "name": "Sara pafromage",
+      "mailAdress": "cheese@gmail.com"
+    }
+  ],
+  "nbGroups": 2,
+  "messages": [
+    {
+      "object": "Uganda Prince need your help",
+      "content": "Send money please"
+    },
+    {
+      "object": "Make pp big",
+      "content": "Yes"
+    }
+  ]
+}

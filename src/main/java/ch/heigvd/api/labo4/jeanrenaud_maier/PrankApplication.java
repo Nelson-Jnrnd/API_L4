@@ -17,11 +17,6 @@ public class PrankApplication {
         try {
             Gson gson = new Gson();
             FileReader reader = new FileReader(args[0]);
-            //Person victim = gson.fromJson(reader, Person.class);
-
-           /* Map<String, Victims> victims = gson.fromJson(reader,
-                    new TypeToken<Map<String, Victims>>() {
-                    }.getType());*/
             Victims victims = gson.fromJson(reader, Victims.class);
             for (Person victim : victims.getVictims()) {
                 System.out.println("name : " + victim.getName() + "\nadresse : " + victim.getMailAdress());
