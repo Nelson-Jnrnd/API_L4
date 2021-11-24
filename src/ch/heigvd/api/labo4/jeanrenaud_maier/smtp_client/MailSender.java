@@ -7,8 +7,10 @@ public class MailSender {
     public MailSender(String smtpServerAdress, int stmpServerPort) {
         this.smtpServerAdress = smtpServerAdress;
         this.stmpServerPort = stmpServerPort;
+        connect();
     }
-    public void connect(){
+    private void connect(){
+
     }
 
     public void sendMail(Mail mail){
