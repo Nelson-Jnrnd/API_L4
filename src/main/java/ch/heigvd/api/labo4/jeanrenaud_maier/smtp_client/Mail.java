@@ -21,7 +21,7 @@ public class Mail {
     }
     public Mail(String message, Person sender, String object, Person... recipients) {
         this.sender = sender;
-        this.object = object;
+        this.object = object;   
         this.recipients = recipients;
         this.message = message;
     }

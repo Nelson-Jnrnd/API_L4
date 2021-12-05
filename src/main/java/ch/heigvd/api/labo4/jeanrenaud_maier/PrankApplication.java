@@ -10,6 +10,7 @@ import com.google.gson.JsonParser;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -27,6 +28,12 @@ public class PrankApplication {
 
     private List<List<Person>> groups;
     private List<Mail> mails;
+
+    /**
+     * Deserialize the JSON String and load it into the application
+     * @param filename JSON String containing the configs
+     * @return the config structure of the data deserialized
+     */
     private Configs readConfigs(String filename){
         try {
             Gson gson = new Gson();
@@ -35,7 +42,7 @@ public class PrankApplication {
             FileReader reader = new FileReader(filename);
             JsonElement element = JsonParser.parseReader(reader);
 
-            // Deserialize
+            // Deserializing the different types of data
             Messages messages = gson.fromJson(element, Messages.class);
             Victims victims = gson.fromJson(element, Victims.class);
             int nbGroups = gson.fromJson(element, JsonObject.class).getAsJsonPrimitive("nbGroups").getAsInt();
@@ -50,6 +57,7 @@ public class PrankApplication {
                 for (Person victim : victims.getVictims()) {
                     System.out.println("name : " + victim.getName() + "\nadresse : " + victim.getMailAdress());
                 }
+                // Adjust the number of groups given to have correct group sizes
                 if(victims.victims.size() / MIN_GROUP_SIZE < nbGroups){
                     nbGroups = victims.victims.size() / MIN_GROUP_SIZE;
                 }
@@ -60,7 +68,6 @@ public class PrankApplication {
             reader.close();
 
             return new Configs(nbGroups, messages, victims);
-
         } catch (IOException e) {
             System.out.println(e.getMessage());
             System.exit(-1);
@@ -68,20 +75,35 @@ public class PrankApplication {
         }
     }
 
+    /**
+     * Create nbGroups from the Person in the loaded config
+     */
     private void createGroups(){
         if(config != null){
+            // Index on the first person of a group
             int indexGroupDebut = 0;
+            // Index on the last person of the group + 1
             int indexGroupFin = config.getGroupSize();
+            List<Person> victimsList = config.getVictims().victims;
+            // Randomizing the order of the victims to have different groups in successive runs
+            Collections.shuffle(victimsList);
             for (int idGroup = 0; idGroup < config.getNbGroups(); idGroup++) {
-                groups.add(config.getVictims().victims.subList(indexGroupDebut, indexGroupFin));
+                // We create a group from the list of persons between the first and the last person of the group
+                groups.add(victimsList.subList(indexGroupDebut, indexGroupFin));
+                // Adjust the indexes
                 indexGroupDebut = indexGroupFin;
                 indexGroupFin += config.getGroupSize();
-                if(indexGroupFin + MIN_GROUP_SIZE > config.getVictims().victims.size()){
-                    indexGroupFin = config.getVictims().victims.size();
+                // If we wont have enough people to make a full size group after, we include them in the next group
+                if(indexGroupFin + MIN_GROUP_SIZE > victimsList.size()){
+                    indexGroupFin = victimsList.size();
                 }
             }
         }
     }
+
+    /**
+     * Create mails from the messages and groups in the config files
+     */
    public void createMails(){
         if(config != null){
             if(groups == null || groups.isEmpty()){
@@ -92,6 +114,7 @@ public class PrankApplication {
                 Person sender = null;
                 Person[] recepient = new Person[group.size() - 1];
 
+                // The sender is a random person in the group, everyone else is a recepient
                 int idSender = randomGenerator.nextInt(group.size());
                 int idPerson = 0;
                 int idRecepient = 0;
@@ -102,6 +125,7 @@ public class PrankApplication {
                         recepient[idRecepient++] = p;
                     }
                 }
+                // We pick a message from the list to assign to the group
                 if(sender != null){
                     Message toSend = msg.get(randomGenerator.nextInt(msg.size())); // maybe changer
                     mails.add(new Mail(toSend.getContent(), sender, toSend.getObject(), recepient));
@@ -124,7 +148,6 @@ public class PrankApplication {
             System.out.println("Invalid number of parameters");
             System.exit(-1);
         }
-
         System.exit(0);
     }
 }
