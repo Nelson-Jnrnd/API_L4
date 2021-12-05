@@ -7,10 +7,7 @@ import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ReplyScannerTest {
-
-    private Reader multiLineTestInput;
-    private Reader singleLineTestInput;
+class ServerReplyCodesScannerTest {
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
@@ -37,7 +34,7 @@ class ReplyScannerTest {
 
         writer.close();
 
-        ReplyScanner replyScanner = new ReplyScanner(inputStream);
+        ServerReplyCodesScanner replyScanner = new ServerReplyCodesScanner(inputStream);
         assertEquals(123, replyScanner.nextCode());
         assertEquals(343, replyScanner.nextCode());
         assertEquals(654, replyScanner.nextCode());
