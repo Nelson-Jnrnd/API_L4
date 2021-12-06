@@ -2,18 +2,23 @@ package ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client;
 
 public class Person {
     private final String name;
-    private final String mailAdress;
+    private final String mailAddress;
 
     public String getName() {
         return name;
     }
 
-    public String getMailAdress() {
-        return mailAdress;
+    public String getMailAddress() {
+        return mailAddress;
     }
 
-    public Person(String name, String mailAdress) {
+    public Person(String name, String mailAddress) {
         this.name = name;
-        this.mailAdress = mailAdress;
+        this.mailAddress = mailAddress;
+    }
+
+    @Override
+    public String toString() {
+        return name + " <" + mailAddress + ">";
     }
 }

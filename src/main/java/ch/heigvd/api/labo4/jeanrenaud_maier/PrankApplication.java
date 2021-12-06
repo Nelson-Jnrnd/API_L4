@@ -52,10 +52,11 @@ public class PrankApplication {
                 for (Message message : messages.getMessages()) {
                     System.out.println("object : " + message.getObject() + "\ncontent : " + message.getContent());
                 }
+
             }
             if(victims != null && victims.victims.size() >= MIN_GROUP_SIZE) {
                 for (Person victim : victims.getVictims()) {
-                    System.out.println("name : " + victim.getName() + "\nadresse : " + victim.getMailAdress());
+                    System.out.println("name : " + victim.getName() + "\nadresse : " + victim.getMailAddress());
                 }
                 // Adjust the number of groups given to have correct group sizes
                 if(victims.victims.size() / MIN_GROUP_SIZE < nbGroups){

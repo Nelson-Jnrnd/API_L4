@@ -10,7 +10,7 @@ public class Mail {
         return sender;
     }
     public Person[] getRecipients() {
-        return recipients;
+        return recipients.clone();
     }
 
     public String getMessage() {
