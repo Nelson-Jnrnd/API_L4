@@ -11,6 +11,30 @@
     {
       "name": "Sara pafromage",
       "mailAdress": "cheese@gmail.com"
+    },
+    {
+      "name": "Lucas selavaissel",
+      "mailAdress": "oops@gmail.com"
+    },
+    {
+      "name": "Noah toidanlelak",
+      "mailAdress": "glouglou@gmail.com"
+    },
+    {
+      "name": "Elie copter",
+      "mailAdress": "chkchkchk@gmail.com"
+    },
+    {
+      "name": "Pascal éd",
+      "mailAdress": "sad@gmail.com"
+    },
+    {
+      "name": "Damien deutrois",
+      "mailAdress": "123@gmail.com"
+    },
+    {
+      "name": "Timothé aulet",
+      "mailAdress": "cheese@gmail.com"
     }
   ],
   "nbGroups": 2,
@@ -20,7 +44,7 @@
       "content": "Send money please"
     },
     {
-      "object": "Make pp big",
+      "object": "yes",
       "content": "Yes"
     }
   ]
