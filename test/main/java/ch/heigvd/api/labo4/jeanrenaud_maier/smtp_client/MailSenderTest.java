@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MailSenderTest {
+public class MailSenderTest {
     private static final int PORT = 4242;
     private ServerSocket receptionistSocket;
     private Scanner socketScanner;
