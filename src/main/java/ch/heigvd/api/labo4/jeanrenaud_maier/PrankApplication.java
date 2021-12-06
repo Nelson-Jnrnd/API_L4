@@ -2,14 +2,9 @@ package ch.heigvd.api.labo4.jeanrenaud_maier;
 
 import ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.*;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 
 public class PrankApplication {
 
@@ -19,7 +14,7 @@ public class PrankApplication {
             FileReader reader = new FileReader(args[0]);
             Victims victims = gson.fromJson(reader, Victims.class);
             for (Person victim : victims.getVictims()) {
-                System.out.println("name : " + victim.getName() + "\nadresse : " + victim.getMailAdress());
+                System.out.println("name : " + victim.getName() + "\nadresse : " + victim.getMailAddress());
             }
             reader.close();
         } catch (IOException e) {

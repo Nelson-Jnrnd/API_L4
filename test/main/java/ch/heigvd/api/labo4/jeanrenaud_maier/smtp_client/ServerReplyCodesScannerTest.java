@@ -18,26 +18,26 @@ class ServerReplyCodesScannerTest {
     }
 
     @Test
-    void codesShouldBeCorrect() throws IOException {
+    void codesShouldBeCorrect() throws Exception {
         PipedInputStream inputStream = new PipedInputStream();
         Writer writer = new OutputStreamWriter(new PipedOutputStream(inputStream), StandardCharsets.UTF_8);
 
-        writer.write("123- test test\r\n");
-        writer.write("123- \r\n");
-        writer.write("123-\r\n");
-        writer.write("123 a bonjour test\r\n");
+        writer.write("354- test test\r\n");
+        writer.write("354- \r\n");
+        writer.write("354-\r\n");
+        writer.write("354 a bonjour test\r\n");
 
-        writer.write("343 a a\n a aaa\r\n");
+        writer.write("250 a a\n a aaa\r\n");
 
-        writer.write("654- hello\r\n");
-        writer.write("654\r\n");
+        writer.write("220- hello\r\n");
+        writer.write("220\r\n");
 
         writer.close();
 
         ServerReplyCodesScanner replyScanner = new ServerReplyCodesScanner(inputStream);
-        assertEquals(123, replyScanner.nextCode());
-        assertEquals(343, replyScanner.nextCode());
-        assertEquals(654, replyScanner.nextCode());
+        assertEquals(ServerReplyCode.START_MAIL_INPUT, replyScanner.nextCode());
+        assertEquals(ServerReplyCode.MAIL_ACTION_OK, replyScanner.nextCode());
+        assertEquals(ServerReplyCode.SERVICE_READY, replyScanner.nextCode());
     }
 
 }
