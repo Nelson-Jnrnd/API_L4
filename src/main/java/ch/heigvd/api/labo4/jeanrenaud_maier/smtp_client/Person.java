@@ -5,14 +5,20 @@ import lombok.Getter;
 import lombok.NonNull;
 
 
-@AllArgsConstructor
 public class Person {
     @Getter
-    @NonNull
     private final String name;
     @Getter
-    @NonNull
     private final String mailAddress;
+
+    public Person(@NonNull String name, @NonNull String mailAddress) {
+        if (!mailAddress.matches("^(.+)@(\\S+)$"))
+            throw new IllegalArgumentException("invalid mail address");
+        if (name == "")
+            throw new IllegalArgumentException("name can not be empty");
+        this.name = name;
+        this.mailAddress = mailAddress;
+    }
 
     @Override
     public String toString() {

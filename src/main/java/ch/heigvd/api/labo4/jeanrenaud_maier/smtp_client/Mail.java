@@ -13,11 +13,13 @@ public class Mail {
     @Getter
     private final String message;
     @Getter
-    private final String object;
+    private final String subject;
 
-    public Mail(@NonNull String message, @NonNull Person sender, @NonNull String object, @NonNull Person... recipients) {
+    public Mail(@NonNull String message, @NonNull Person sender, @NonNull String subject, @NonNull Person... recipients) {
+        if (recipients.length < 1)
+            throw new IllegalArgumentException("Need at least 1 recipient");
         this.sender = sender;
-        this.object = object;
+        this.subject = subject;
         this.recipients = recipients.clone();
         this.message = message;
     }

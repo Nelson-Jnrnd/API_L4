@@ -73,11 +73,12 @@ public class MailSender implements AutoCloseable {
      * @throws IOException if a communication error occurs
      */
     private void sendMessageHeaders(Mail mail) throws IOException {
-        sendLineToServer("From: " + headerEncode(mail.getSender().toString()));
+        sendLineToServer("From: " + mail.getSender().toString());
         for (Person recipient : mail.getRecipients()) {
-            sendLineToServer("To: " + headerEncode(recipient.toString()));
+            sendLineToServer("To: " + recipient.toString());
         }
-        sendLineToServer("Subject: " + headerEncode(mail.getObject()));
+        if (!mail.getSubject().equals(""))
+            sendLineToServer("Subject: " + headerEncode(mail.getSubject()));
         // the following headers enable sending non ASCII characters in message
         // see https://datatracker.ietf.org/doc/html/rfc2045
         sendLineToServer("MIME-Version: 1.0");
