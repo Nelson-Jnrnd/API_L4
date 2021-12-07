@@ -2,39 +2,39 @@
   "victims": [
     {
       "name": "Alain Terieur",
-      "mailAdress": "AlainTerieur@gmail.com"
+      "mailAddress": "AlainTerieur@gmail.com"
     },
     {
       "name": "Alex Terieur",
-      "mailAdress": "AlexTerieur@gmail.com"
+      "mailAddress": "AlexTerieur@gmail.com"
     },
     {
       "name": "Sara pafromage",
-      "mailAdress": "cheese@gmail.com"
+      "mailAddress": "cheese@gmail.com"
     },
     {
       "name": "Lucas selavaissel",
-      "mailAdress": "oops@gmail.com"
+      "mailAddress": "oops@gmail.com"
     },
     {
       "name": "Noah toidanlelak",
-      "mailAdress": "glouglou@gmail.com"
+      "mailAddress": "glouglou@gmail.com"
     },
     {
       "name": "Elie copter",
-      "mailAdress": "chkchkchk@gmail.com"
+      "mailAddress": "chkchkchk@gmail.com"
     },
     {
-      "name": "Pascal éd",
-      "mailAdress": "sad@gmail.com"
+      "name": "Pascal aid",
+      "mailAddress": "sad@gmail.com"
     },
     {
       "name": "Damien deutrois",
-      "mailAdress": "123@gmail.com"
+      "mailAddress": "123@gmail.com"
     },
     {
-      "name": "Timothé aulet",
-      "mailAdress": "cheese@gmail.com"
+      "name": "Timothe aulet",
+      "mailAddress": "cheese@gmail.com"
     }
   ],
   "nbGroups": 2,
@@ -44,8 +44,8 @@
       "content": "Send money please"
     },
     {
-      "object": "yes",
-      "content": "Yes"
+      "object": "accentué",
+      "content": "Est-ce que ce message s'affiche correctement à l'écran même si il y a des caractères accentués ?"
     }
   ]
 }
