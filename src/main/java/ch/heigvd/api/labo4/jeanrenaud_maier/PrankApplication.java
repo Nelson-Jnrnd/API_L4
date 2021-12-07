@@ -179,7 +179,7 @@ public class PrankApplication {
     /**
      *
      * @param configs config string to load into the application, this need to be in the JSON format.
-     *                For more informations, @see <a href="https://github.com/Nelson-Jnrnd/API_L4">https://github.com/Nelson-Jnrnd/API_L4</a>
+     *                For more information, @see <a href="https://github.com/Nelson-Jnrnd/API_L4">https://github.com/Nelson-Jnrnd/API_L4</a>
      * @param logging the class will log the results, errors are always logged.
      */
     PrankApplication(String configs, boolean logging) {
