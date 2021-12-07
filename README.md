@@ -103,7 +103,7 @@ run -p 8282:8282 -p 25:25 maierjeanrenaud/apil4
 
 Once you have launched the Docker container, MockMock will wait for SMTP connections on port 25 of your localhost. You just need to make sure that the json config file of the prank application has the "ip" parameter set to "localhost" and the "port" parameter set to 25. Then run the prank application to make it send the mails to MockMock.
 
-Then you can access the MockMock web interface by opening a web browser and typing [localhost](http://localhost):8282 in the address bar. Here you can see the mails received by MockMock.
+Then you can access the MockMock web interface by opening a web browser and typing [localhost](http://localhost:8282) in the address bar. Here you can see the mails received by MockMock.
 
 # Our implementation
 
