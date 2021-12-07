@@ -166,3 +166,7 @@ To create the groups, the application will randomize the list of all the persons
 ### Mail creation
 
 For each groups, we use a random number generator to pick a message from the configs and a person from this group to be the sender, all the other persons are recepient of this email.
+
+
+# Complete Class Diagram
+![uml.png](figures/umlcomplete.png)
