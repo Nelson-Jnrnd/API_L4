@@ -19,16 +19,23 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * PrankApplication that sends fake emails to a number of victims
+ * This class requires a config string in the JSON format
+ * @see <a href="https://github.com/Nelson-Jnrnd/API_L4">https://github.com/Nelson-Jnrnd/API_L4</a>
+ * @author Damien Maier
+ * @author Nelson Jeanrenaud
+ */
 public class PrankApplication {
 
     private static final int MIN_GROUP_SIZE = 3;
     private static final Logger LOG = Logger.getLogger(PrankApplication.class.getName());
-    private final Configs config;
-    private static final Random randomGenerator = new Random();
+    private static final Random RANDOM_GENERATOR = new Random();
 
+    private final Configs config;
     private final List<List<Person>> groups;
     private final List<Mail> mails;
-    private boolean isLogging;
+    private final boolean isLogging;
 
     /**
      * Deserialize the JSON String and load it into the application
@@ -36,7 +43,7 @@ public class PrankApplication {
      * @param filename JSON String containing the configs
      * @return the config structure of the data deserialized
      */
-    private Configs readConfigs(String filename) {
+    public Configs readConfigs(String filename) {
         try {
             if (isLogging)
                 LOG.log(Level.INFO,"Reading config file...");
@@ -132,7 +139,7 @@ public class PrankApplication {
                 Person[] recipient = new Person[group.size() - 1];
 
                 // The sender is a random person in the group, everyone else is a recipient
-                int idSender = randomGenerator.nextInt(group.size());
+                int idSender = RANDOM_GENERATOR.nextInt(group.size());
                 int idPerson = 0;
                 int idRecipient = 0;
                 for (Person p : group) {
@@ -144,7 +151,7 @@ public class PrankApplication {
                 }
                 // We pick a message from the list to assign to the group
                 if (sender != null) {
-                    Message toSend = msg.get(randomGenerator.nextInt(msg.size())); // maybe changer
+                    Message toSend = msg.get(RANDOM_GENERATOR.nextInt(msg.size())); // maybe changer
                     mails.add(new Mail(toSend.getContent(), sender, toSend.getObject(), recipient));
                 }
 
@@ -152,7 +159,11 @@ public class PrankApplication {
         }
     }
 
-    private void sendMails() {
+    /**
+     * Send mails to the victims from the loaded config
+     */
+    public void sendMails() {
+        createMails();
         if(isLogging)
             LOG.log(Level.INFO,"Sending mails...");
         try (MailSender mailSender = new MailSender(config.getIpAddress(), config.getNoPort())) {
@@ -165,6 +176,12 @@ public class PrankApplication {
         }
     }
 
+    /**
+     *
+     * @param configs config string to load into the application, this need to be in the JSON format.
+     *                For more informations, @see <a href="https://github.com/Nelson-Jnrnd/API_L4">https://github.com/Nelson-Jnrnd/API_L4</a>
+     * @param logging the class will log the results, errors are always logged.
+     */
     PrankApplication(String configs, boolean logging) {
         isLogging = logging;
         groups = new ArrayList<>();
@@ -175,7 +192,7 @@ public class PrankApplication {
     public static void main(String[] args) {
         try {
             PrankApplication pa = new PrankApplication(args[0], true);
-            pa.createMails();
+            //pa.createMails();
             pa.sendMails();
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Invalid number of parameters");
