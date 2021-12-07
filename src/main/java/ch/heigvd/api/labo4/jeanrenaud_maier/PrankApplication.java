@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.extern.java.Log;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -42,8 +43,7 @@ public class PrankApplication {
                 LOG.log(Level.INFO,"Reading config file...");
             Gson gson = new Gson();
 
-            // Changer en bufferedStream
-            FileReader reader = new FileReader(filename, StandardCharsets.UTF_8);
+            BufferedReader reader = new BufferedReader(new FileReader(filename, StandardCharsets.UTF_8));
             JsonElement element = JsonParser.parseReader(reader);
 
             // Deserializing the different types of data

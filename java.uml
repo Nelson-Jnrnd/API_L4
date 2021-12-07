@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>D:/prog/heigVD_2021/API/API_L4/src/main/java</OriginalElement>
+  <nodes>
+    <node x="483.4355022831048" y="941.0">ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication</node>
+    <node x="665.9594748858447" y="329.0">ch.heigvd.api.labo4.jeanrenaud_maier.Victims</node>
+    <node x="0.0" y="535.0">ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.MailSender</node>
+    <node x="376.79166666666663" y="296.0">ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Mail</node>
+    <node x="892.5844748858447" y="66.5">ch.heigvd.api.labo4.jeanrenaud_maier.Message</node>
+    <node x="0.2511415525112852" y="306.5">ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.ServerReplyCodesScanner</node>
+    <node x="138.2688356164382" y="0.0">ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.ServerReplyCode</node>
+    <node x="584.2271689497715" y="612.5">ch.heigvd.api.labo4.jeanrenaud_maier.Configs</node>
+    <node x="854.9594748858447" y="329.0">ch.heigvd.api.labo4.jeanrenaud_maier.Messages</node>
+    <node x="413.08447488584466" y="55.0">ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Person</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.ServerReplyCodesScanner" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.ServerReplyCode" relationship="DEPENDENCY">
+      <point x="0.0" y="-62.0" />
+      <point x="130.75114155251129" y="275.0" />
+      <point x="251.2688356164382" y="275.0" />
+      <point x="0.0" y="117.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.Messages" target="ch.heigvd.api.labo4.jeanrenaud_maier.Message" relationship="DEPENDENCY">
+      <point x="47.75" y="-39.5" />
+      <point x="998.2094748858447" y="275.0" />
+      <point x="984.5844748858447" y="275.0" />
+      <point x="984.5844748858447" y="265.0" />
+      <point x="1023.0844748858447" y="265.0" />
+      <point x="43.5" y="50.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.MailSender" relationship="CREATE">
+      <point x="-77.0" y="-161.0" />
+      <point x="521.9355022831048" y="920.0" />
+      <point x="443.85216894977145" y="920.0" />
+      <point x="443.85216894977145" y="910.0" />
+      <point x="161.5" y="910.0" />
+      <point x="0.0" y="172.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.MailSender" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Mail" relationship="DEPENDENCY">
+      <point x="107.66666666666669" y="-172.0" />
+      <point x="269.1666666666667" y="513.0" />
+      <point x="391.32134703196346" y="513.0" />
+      <point x="391.32134703196346" y="503.0" />
+      <point x="417.45833333333326" y="503.0" />
+      <point x="-81.33333333333337" y="72.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.MailSender" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.ServerReplyCodesScanner" relationship="CREATE">
+      <point x="-107.66666666666669" y="-172.0" />
+      <point x="53.83333333333326" y="513.0" />
+      <point x="65.50114155251129" y="513.0" />
+      <point x="-65.25" y="62.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.Messages" target="ch.heigvd.api.labo4.jeanrenaud_maier.Message" relationship="TO_MANY">
+      <point x="-47.75" y="-39.5" />
+      <point x="902.7094748858447" y="275.0" />
+      <point x="936.0844748858447" y="275.0" />
+      <point x="-43.5" y="50.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Mail" relationship="CREATE">
+      <point x="-77.0" y="-161.0" />
+      <point x="521.9355022831048" y="920.0" />
+      <point x="443.85216894977145" y="920.0" />
+      <point x="443.85216894977145" y="910.0" />
+      <point x="491.86529680365265" y="910.0" />
+      <point x="491.86529680365265" y="503.0" />
+      <point x="498.79166666666663" y="503.0" />
+      <point x="0.0" y="72.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.Configs" relationship="TO_ONE">
+      <point x="0.0" y="-161.0" />
+      <point x="598.9355022831048" y="920.0" />
+      <point x="619.0844748858447" y="920.0" />
+      <point x="619.0844748858447" y="900.0" />
+      <point x="789.7271689497715" y="900.0" />
+      <point x="68.5" y="94.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.Configs" target="ch.heigvd.api.labo4.jeanrenaud_maier.Victims" relationship="TO_ONE">
+      <point x="-68.5" y="-94.5" />
+      <point x="652.7271689497715" y="493.0" />
+      <point x="708.2094748858447" y="493.0" />
+      <point x="-42.25" y="39.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.Configs" target="ch.heigvd.api.labo4.jeanrenaud_maier.Messages" relationship="DEPENDENCY">
+      <point x="68.5" y="-94.5" />
+      <point x="789.7271689497715" y="513.0" />
+      <point x="879.2271689497715" y="513.0" />
+      <point x="879.2271689497715" y="503.0" />
+      <point x="966.4594748858447" y="503.0" />
+      <point x="966.4594748858447" y="483.0" />
+      <point x="998.2094748858447" y="483.0" />
+      <point x="47.75" y="39.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.Configs" target="ch.heigvd.api.labo4.jeanrenaud_maier.Messages" relationship="TO_ONE">
+      <point x="-68.5" y="-94.5" />
+      <point x="652.7271689497715" y="493.0" />
+      <point x="902.7094748858447" y="493.0" />
+      <point x="-47.75" y="39.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.Victims" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Person" relationship="TO_MANY">
+      <point x="42.25" y="-39.5" />
+      <point x="792.7094748858447" y="265.0" />
+      <point x="755.4594748858447" y="265.0" />
+      <point x="755.4594748858447" y="255.0" />
+      <point x="549.7511415525113" y="255.0" />
+      <point x="54.66666666666663" y="62.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.Victims" relationship="DEPENDENCY">
+      <point x="77.0" y="-161.0" />
+      <point x="675.9355022831048" y="920.0" />
+      <point x="987.2271689497715" y="920.0" />
+      <point x="987.2271689497715" y="910.0" />
+      <point x="868.7271689497715" y="910.0" />
+      <point x="868.7271689497715" y="483.0" />
+      <point x="873.9771689497715" y="483.0" />
+      <point x="873.9771689497715" y="463.0" />
+      <point x="792.7094748858447" y="463.0" />
+      <point x="42.25" y="39.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.Messages" relationship="DEPENDENCY">
+      <point x="77.0" y="-161.0" />
+      <point x="675.9355022831048" y="920.0" />
+      <point x="987.2271689497715" y="920.0" />
+      <point x="987.2271689497715" y="910.0" />
+      <point x="971.7094748858447" y="910.0" />
+      <point x="971.7094748858447" y="493.0" />
+      <point x="966.4594748858447" y="493.0" />
+      <point x="966.4594748858447" y="483.0" />
+      <point x="998.2094748858447" y="483.0" />
+      <point x="47.75" y="39.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.Victims" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Person" relationship="DEPENDENCY">
+      <point x="-42.25" y="-39.5" />
+      <point x="708.2094748858447" y="275.0" />
+      <point x="476.72831050228285" y="275.0" />
+      <point x="476.72831050228285" y="265.0" />
+      <point x="495.08447488584466" y="265.0" />
+      <point x="0.0" y="62.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.Configs" target="ch.heigvd.api.labo4.jeanrenaud_maier.Victims" relationship="DEPENDENCY">
+      <point x="68.5" y="-94.5" />
+      <point x="789.7271689497715" y="513.0" />
+      <point x="879.2271689497715" y="513.0" />
+      <point x="879.2271689497715" y="473.0" />
+      <point x="873.9771689497715" y="473.0" />
+      <point x="873.9771689497715" y="463.0" />
+      <point x="792.7094748858447" y="463.0" />
+      <point x="42.25" y="39.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Mail" relationship="TO_MANY">
+      <point x="0.0" y="-161.0" />
+      <point x="598.9355022831048" y="920.0" />
+      <point x="619.0844748858447" y="920.0" />
+      <point x="619.0844748858447" y="900.0" />
+      <point x="502.86529680365265" y="900.0" />
+      <point x="502.86529680365265" y="513.0" />
+      <point x="580.1249999999999" y="513.0" />
+      <point x="81.33333333333326" y="72.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.MailSender" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.ServerReplyCodesScanner" relationship="TO_ONE">
+      <point x="0.0" y="-172.0" />
+      <point x="161.5" y="513.0" />
+      <point x="196.00114155251129" y="513.0" />
+      <point x="65.25" y="62.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.Message" relationship="DEPENDENCY">
+      <point x="77.0" y="-161.0" />
+      <point x="675.9355022831048" y="920.0" />
+      <point x="987.2271689497715" y="920.0" />
+      <point x="987.2271689497715" y="910.0" />
+      <point x="1056.4594748858447" y="910.0" />
+      <point x="1056.4594748858447" y="275.0" />
+      <point x="984.5844748858447" y="275.0" />
+      <point x="984.5844748858447" y="265.0" />
+      <point x="1023.0844748858447" y="265.0" />
+      <point x="43.5" y="50.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.MailSender" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Person" relationship="DEPENDENCY">
+      <point x="107.66666666666669" y="-172.0" />
+      <point x="269.1666666666667" y="513.0" />
+      <point x="391.32134703196346" y="513.0" />
+      <point x="391.32134703196346" y="503.0" />
+      <point x="366.29166666666663" y="503.0" />
+      <point x="366.29166666666663" y="275.0" />
+      <point x="476.72831050228285" y="275.0" />
+      <point x="476.72831050228285" y="265.0" />
+      <point x="495.08447488584466" y="265.0" />
+      <point x="0.0" y="62.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Person" relationship="CREATE">
+      <point x="-77.0" y="-161.0" />
+      <point x="521.9355022831048" y="920.0" />
+      <point x="443.85216894977145" y="920.0" />
+      <point x="443.85216894977145" y="910.0" />
+      <point x="355.29166666666663" y="910.0" />
+      <point x="355.29166666666663" y="265.0" />
+      <point x="440.4178082191779" y="265.0" />
+      <point x="-54.666666666666686" y="62.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Mail" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Person" relationship="TO_ONE">
+      <point x="61.0" y="-72.5" />
+      <point x="559.7916666666666" y="265.0" />
+      <point x="755.4594748858447" y="265.0" />
+      <point x="755.4594748858447" y="255.0" />
+      <point x="549.7511415525113" y="255.0" />
+      <point x="54.66666666666663" y="62.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication" target="ch.heigvd.api.labo4.jeanrenaud_maier.Configs" relationship="CREATE">
+      <point x="-77.0" y="-161.0" />
+      <point x="521.9355022831048" y="920.0" />
+      <point x="443.85216894977145" y="920.0" />
+      <point x="443.85216894977145" y="910.0" />
+      <point x="652.7271689497715" y="910.0" />
+      <point x="-68.5" y="94.5" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.MailSender" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.ServerReplyCode" relationship="DEPENDENCY">
+      <point x="107.66666666666669" y="-172.0" />
+      <point x="269.1666666666667" y="513.0" />
+      <point x="391.32134703196346" y="513.0" />
+      <point x="391.32134703196346" y="503.0" />
+      <point x="309.6261415525113" y="503.0" />
+      <point x="309.6261415525113" y="275.0" />
+      <point x="251.2688356164382" y="275.0" />
+      <point x="0.0" y="117.0" />
+    </edge>
+    <edge source="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Mail" target="ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client.Person" relationship="DEPENDENCY">
+      <point x="-61.0" y="-72.5" />
+      <point x="437.79166666666663" y="275.0" />
+      <point x="476.72831050228285" y="275.0" />
+      <point x="476.72831050228285" y="265.0" />
+      <point x="495.08447488584466" y="265.0" />
+      <point x="0.0" y="62.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.6207716289945441" showDependencies="true" x="390.80987694151065" y="597.1106537952561" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
