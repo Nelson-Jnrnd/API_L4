@@ -109,6 +109,7 @@ Then you can access the MockMock web interface by opening a web browser and typi
 
 ## Class Diagram
 
+Here is a diagram of the most important classes of our application :
 ![uml.png](figures/uml.png)
 
 ## Packages
