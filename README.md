@@ -1,62 +1,165 @@
-# API_L4
-Labo 4 of the API course, 3rd semester HEIG-VD. Partial implementation of the SMTP protocol
-# API-2021-SMTP
-## Objectives
+# API - L4 - SMTP
 
-In this lab, you will develop a client application (TCP) in Java. This client application will use the Socket API to communicate with an SMTP server. The code that you write will include a **partial implementation of the SMTP protocol**. These are the objectives of the lab:
+This project is a Java application made during the API course of the third semester of the Computer Science Bachelor at the HEIG-VD.
 
-* Make practical experiments to become familiar with the **SMTP protocol**. After the lab, you should be able to use a command line tool to **communicate with an SMTP server**. You should be able to send well-formed messages to the server, in order to send emails to the address of your choice.
+The application allows the user to send fake emails to a number of groups from a list of victim.
 
-* Understand the notions of **test double** and **mock server**, which are useful when developing and testing a client-server application. During the lab, you will setup and use such a **mock server**.
+# Usage
 
-* Understand what it means to **implement the SMTP protocol** and be able to send e-mail messages, by working directly on top of the Socket API (i.e. you are not allowed to use a SMTP library).
+To use this application it is needed to create a config file that will contain the following informations in the JSON format :
 
-* **See how easy it is to send forged e-mails**, which appear to be sent by certain people but in reality are issued by malicious users.
+- IP address and port number of the SMTP server
+- Name and the mail address of the victims (senders and recepients)
+- Number of groups to create
+- Content of the mails (objects and body)
 
-* **Design a simple object-oriented model** to implement the functional requirements described in the next paragraph.
+## Exemple
 
+```json
+{
+  "ip": "localhost",
+  "port": 25,
+  "victims": [
+    {
+      "name": "Alain Terieur",
+      "mailAddress": "AlainTerieur@gmail.com"
+    },
+    {
+      "name": "Alex Terieur",
+      "mailAddress": "AlexTerieur@gmail.com"
+    },
+    {
+      "name": "Sara pafromage",
+      "mailAddress": "cheese@gmail.com"
+    }
+  ],
+  "nbGroups": 1,
+  "messages": [
+    {
+      "object": "My message",
+      "content": "My message"
+    },
+    {
+      "object": "Hello",
+      "content": "Hi"
+    }
+  ]
+}
+```
 
-## Functional requirements
+Once you have the config file ready you can use the prankApplication.jar application to send the mails. You need to specify the json config file as parameter when you run the application.
 
-Your mission is to develop a client application that automatically plays pranks on a list of victims:
+## Using our class in your own Java project
 
-* The user should be able to **define a list of victims** (concretely, you should be able to create a file containing a list of e-mail addresses).
-* The user should be able to **define how many groups of victims should be formed** in a given campaign. In every group of victims, there should be 1 sender and at least 2 recipients (i.e. the minimum size for a group is 3).
-* The user should be able to **define a list of e-mail messages**. When a prank is played on a group of victims, then one of these messages should be selected. **The mail should be sent to all group recipients, from the address of the group sender**. In other words, the recipient victims should be lead to believe that the sender victim has sent them.
+Using our class within another project is very easy, you'll only have to create a new PrankApplication giving it the configs in a string format and whether you want the application to log the outputs.
 
-## Constraints
+Then you only need to use the sendMails method to launch your fake mail campaign !
 
-- The goal is for you to work at the wire protocol level (with the Socket API). Therefore, you CANNOT use a library that takes care of the protocol details. You have to work with the input and output streams.
-- The program must be configurable: the addresses, groups, messages CANNOT be hard-coded in the program and MUST be managed in config files.
+If you ever need to change the configs of an already existing PrankApplication you can call the readConfigs method with the config string in argument.
 
+# Goals
 
-## Example
+- The objective of this lab was to develop a Java TCP client which will use a partial implementation of the SMTP protocol to communicate with a SMTP server.
+- Understand how and why use a mock server in the tests of client-server applications
+- Train the usage of docker in a project
 
-Consider that your program generates a group G1. The group sender is Bob. The group recipients are Alice, Claire and Peter. When the prank is played on group G1, then your program should pick one of the fake messages. It should communicate with an SMTP server, so that Alice, Claire and Peter receive an e-mail, which appears to be sent by Bob.
+# MockMock
 
-## Teams
+MockMock is a "fake" SMTP server. From the point of view of an SMTP client, it behaves like a normal SMTP server that allows to send e-mails. But it does not actually send any e-mail, it just displays the e-mails that would be sent if it was a real SMTP server.
 
-You may work in teams of 2 students.
+You can use MockMock to test our application while being sure that no e-mail will actually be sent.
 
-## Deliverables
+## Running MockMock
 
-You will deliver the results of your lab in a GitHub repository. You do not have to fork a specific repo, you can create one from scratch.
+In this repo we provide the necessary tools to run a Docker container that runs a MockMock server.
 
-Your repository should contain both the source code of your Java project and your report. Your report should be a single `README.md` file, located at the root of your repository. The images should be placed in a `figures` directory.
+For this you will need to install Docker (you can find installation instructions for your OS [here](https://docs.docker.com/get-docker/)).
 
-Your report MUST include the following sections:
+To run the Docker container, if you use Linux, you just have to open a terminal in the "docker" directory of this repo and type the command
 
-* **A brief description of your project**: if people exploring GitHub find your repo, without a prior knowledge of the API course, they should be able to understand what your repo is all about and whether they should look at it more closely.
+```bash
+chmod +x runMockMock.sh
+./runMockMock.sh
+```
 
-* **Instructions for setting up a mock SMTP server (with Docker - which you will learn all about in the next 2 weeks)**. The user who wants to experiment with your tool but does not really want to send pranks immediately should be able to use a mock SMTP server. For people who are not familiar with this concept, explain it to them in simple terms. Explain which mock server you have used and how you have set it up.
+This will automatically configure and build the docker image and start a new container based on it.
 
-* **Clear and simple instructions for configuring your tool and running a prank campaign**. If you do a good job, an external user should be able to clone your repo, edit a couple of files and send a batch of e-mails in less than 10 minutes.
+Alternatively, you can open a terminal in the "docker" directory of this repo and type the following command to build the image manually :
 
-* **A description of your implementation**: document the key aspects of your code. It is probably a good idea to start with a class diagram. Decide which classes you want to show (focus on the important ones) and describe their responsibilities in text. It is also certainly a good idea to include examples of dialogues between your client and an SMTP server (maybe you also want to include some screenshots here).
+```bash
+docker build --tag maierjeanrenaud/apil4 . 
+```
 
-## References
+Then you can run the image with :
 
-* [Here is our fork of MockMock server](https://github.com/HEIGVD-Course-API/MockMock), in which we resolved an issues with a dependency (see this [pull request](https://github.com/tweakers/MockMock/pull/8) if you want to have more information).
-* The [mailtrap](<https://mailtrap.io/>) online service for testing SMTP
-* The [SMTP RFC](<https://tools.ietf.org/html/rfc5321#appendix-D>), and in particular the [example scenario](<https://tools.ietf.org/html/rfc5321#appendix-D>)
-* Testing SMTP with TLS: `openssl s_client -connect smtp.mailtrap.io:2525 -starttls smtp -crlf`
+```bash
+run -p 8282:8282 -p 25:25 maierjeanrenaud/apil4
+```
+
+## Using MockMock to test our application
+
+Once you have launched the Docker container, MockMock will wait for SMTP connections on port 25 of your localhost. You just need to make sure that the json config file of the prank application has the "ip" parameter set to "localhost" and the "port" parameter set to 25. Then run the prank application to make it send the mails to MockMock.
+
+Then you can access the MockMock web interface by opening a web browser and typing [localhost](http://localhost):8282 in the address bar. Here you can see the mails received by MockMock.
+
+# Our implementation
+
+## Class Diagram
+
+![uml.png](API%20-%20L4%20-%20SMTP%20ba8be2a426a04c1ba896a85a9493fc4e/uml.png)
+
+## Packages
+
+We decided to separate this project in packages to offer greater reusability to parts of the code, notably the SMTP client.
+
+## SMTP_Client package
+
+As said above, this package contains everything needed to send mails to an SMTP server.
+
+### MailSender
+
+This class implements a simple client able to send e-mails with SMTP using the commands described in RFC 5321.
+
+When an instance of this class is created, it opens a TCP connection to the server and starts the SMTP communication by reading the server initial message and sending the EHLO command.
+
+![Example of a TCP connection initiation from our application](API%20-%20L4%20-%20SMTP%20ba8be2a426a04c1ba896a85a9493fc4e/Untitled.png)
+
+Example of a TCP connection initiation from our application
+
+To send an e-mail, the client uses the MAIL FROM, RCPT TO and DATA commands with appropriate parameters. It generates and sends the headers for the message and then it sends the message body.
+
+![Example a of messages exchanged between the server and the client when our application sends an e-mail](API%20-%20L4%20-%20SMTP%20ba8be2a426a04c1ba896a85a9493fc4e/Untitled%201.png)
+
+Example a of messages exchanged between the server and the client when our application sends an e-mail
+
+To allow correct displaying of non ASCII parameters in the "subject" header, the client uses an appropriate encoding as specified in RFC 2047. To allow correct displaying of non ASCII parameters in the message body, it encodes them with UTF-8 and uses an appropriate message header as specified in RFC 2045.
+
+Each time the client sends a commend, it checks that the server replies as expected. If an unexpected reply is received from the server, the client simply throws an exception.
+
+### ServerReplyCodeScanner
+
+This class is a simple parser that identifies the reply codes sent by the server. It can process both single line and multi line server replies.
+
+## PrankApplication
+
+This class is the main application of the project, it contains the methods to read the config files, create the groups and uses a `MailSender` to send emails to the created groups.
+
+### Configs
+
+The prank application uses a config class as a structure to contain all the data fetched from the config file.
+
+The configs are read in the `readConfigs` method which is itself called automatically at the start of the application
+
+Then the JSON configs are deserialized using the [GSON library](https://github.com/google/gson) and if the data read are usable the configs object is populated.
+
+### Json models
+
+To deserialize the JSON objects correctly, we are using model classes for the messages and the victims.
+
+### Group creation
+
+To create the groups, the application will randomize the list of all the persons. Then it'll create `nbGroups` groups of the maximum size possible. If there's not enough persons to create a full group, they'll all be assigned to an existing group.
+
+### Mail creation
+
+For each groups, we use a random number generator to pick a message from the configs and a person from this group to be the sender, all the other persons are recepient of this email.
