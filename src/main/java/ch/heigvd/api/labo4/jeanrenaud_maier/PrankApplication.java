@@ -190,6 +190,7 @@ public class PrankApplication {
     }
 
     public static void main(String[] args) {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "%4$s: %5$s%6$s%n");
         try {
             PrankApplication pa = new PrankApplication(args[0], true);
             //pa.createMails();

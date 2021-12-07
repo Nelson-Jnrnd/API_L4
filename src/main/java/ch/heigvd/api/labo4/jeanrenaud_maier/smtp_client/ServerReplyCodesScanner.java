@@ -1,13 +1,19 @@
 package ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client;
 
+import ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication;
+
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A parser that reads reply codes from an SMTP server
  */
 class ServerReplyCodesScanner {
+
+    private static final Logger LOG = Logger.getLogger(PrankApplication.class.getName());
 
     private final Scanner serverScanner;
 
@@ -31,6 +37,7 @@ class ServerReplyCodesScanner {
         String receivedLine;
         do {
             receivedLine = serverScanner.next();
+            LOG.log(Level.INFO, "Server : " + receivedLine);
         } while (!isLast(receivedLine));
         ServerReplyCode code = ServerReplyCode.getByCode(Integer.parseInt(receivedLine.substring(0, 3)));
         if (code == null)

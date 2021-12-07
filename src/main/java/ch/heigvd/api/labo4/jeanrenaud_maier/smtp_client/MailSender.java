@@ -1,5 +1,9 @@
 package ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client;
 
+import ch.heigvd.api.labo4.jeanrenaud_maier.PrankApplication;
+import lombok.extern.java.Log;
+
+import javax.print.attribute.standard.Severity;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -8,6 +12,8 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implements a minimal SMTP client able to send mails to multiple recipients and with non ASCII characters.
@@ -19,6 +25,8 @@ public class MailSender implements AutoCloseable {
     private final Socket socket;
     private final Writer serverWriter;
     private final ServerReplyCodesScanner serverReplyCodesScanner;
+
+    private static final Logger LOG = Logger.getLogger(PrankApplication.class.getName());
 
     /**
      * Connects the client to an SMTP server and initiates communication
@@ -128,6 +136,7 @@ public class MailSender implements AutoCloseable {
         //lines end with CLRF, see https://datatracker.ietf.org/doc/html/rfc5321#section-2.3.8
         serverWriter.write(line + "\r\n");
         serverWriter.flush();
+        LOG.log(Level.INFO, "Client : " + line);
     }
 
     /**
