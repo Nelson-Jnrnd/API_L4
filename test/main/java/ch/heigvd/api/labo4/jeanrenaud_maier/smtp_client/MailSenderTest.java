@@ -106,6 +106,9 @@ public class MailSenderTest {
         assertEquals("To: rec2 <c@c.com>", socketScanner.next());
         assertEquals("To: rec3 <d@d.com>", socketScanner.next());
         assertEquals("Subject: object", socketScanner.next());
+        assertEquals("MIME-Version: 1.0", socketScanner.next());
+        assertEquals("Content-Type: text/plain; charset=utf-8", socketScanner.next());
+        assertEquals("Content-Transfer-Encoding: 8bit", socketScanner.next());
         assertEquals("", socketScanner.next());
 
         assertEquals("Message", socketScanner.next());
