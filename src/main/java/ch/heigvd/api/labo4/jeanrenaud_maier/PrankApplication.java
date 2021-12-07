@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import lombok.extern.java.Log;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,17 +16,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PrankApplication {
 
     private static final int MIN_GROUP_SIZE = 3;
-
+    private static final Logger LOG = Logger.getLogger(PrankApplication.class.getName());;
     private final Configs config;
     private static final Random randomGenerator = new Random();
 
-
     private final List<List<Person>> groups;
     private final List<Mail> mails;
+    private boolean isLogging;
 
     /**
      * Deserialize the JSON String and load it into the application
@@ -35,6 +38,8 @@ public class PrankApplication {
      */
     private Configs readConfigs(String filename) {
         try {
+            if (isLogging)
+                LOG.log(Level.INFO,"Reading config file...");
             Gson gson = new Gson();
 
             // Changer en bufferedStream
@@ -42,34 +47,45 @@ public class PrankApplication {
             JsonElement element = JsonParser.parseReader(reader);
 
             // Deserializing the different types of data
+            JsonObject jsonObject = gson.fromJson(element, JsonObject.class);
             Messages messages = gson.fromJson(element, Messages.class);
             Victims victims = gson.fromJson(element, Victims.class);
-            int nbGroups = gson.fromJson(element, JsonObject.class).getAsJsonPrimitive("nbGroups").getAsInt();
+            int nbGroups = jsonObject.getAsJsonPrimitive("nbGroups").getAsInt();
+            String ipAddress = jsonObject.getAsJsonPrimitive("ip").getAsString();
+            int noPort = jsonObject.getAsJsonPrimitive("port").getAsInt();
+
+            // Error management
+            if(messages == null){
+                throw new IllegalArgumentException("messages format in config file is incorrect");
+            } else if(victims == null){
+                throw new IllegalArgumentException("victims format in config file is incorrect");
+            }else if(victims.victims.size() < MIN_GROUP_SIZE){
+                throw new IllegalArgumentException("Not enough victims, minimum " + MIN_GROUP_SIZE + " victims needed");
+            }else if(nbGroups <= 0){
+                throw new IllegalArgumentException("nbGroups format in config file is incorrect");
+            }else if(noPort <= 0){
+                throw new IllegalArgumentException("noPort format in config file is incorrect");
+            } else if(ipAddress == null) {
+                throw new IllegalArgumentException("ipAddress format in config file is incorrect");
+            }
 
             // Debug
-            if (messages != null) {
+            if(isLogging){
                 for (Message message : messages.getMessages()) {
-                    System.out.println("object : " + message.getObject() + "\ncontent : " + message.getContent());
+                    LOG.log(Level.INFO,"object : " + message.getObject() + "\ncontent : " + message.getContent());
                 }
-
-            }
-            if (victims != null && victims.victims.size() >= MIN_GROUP_SIZE) {
                 for (Person victim : victims.getVictims()) {
-                    System.out.println("name : " + victim.getName() + "\nadresse : " + victim.getMailAddress());
+                    LOG.log(Level.INFO,"name : " + victim.getName() + "\nadresse : " + victim.getMailAddress());
                 }
-                // Adjust the number of groups given to have correct group sizes
-                if (victims.victims.size() / MIN_GROUP_SIZE < nbGroups) {
-                    nbGroups = victims.victims.size() / MIN_GROUP_SIZE;
-                }
-            } else {
-                throw new IllegalArgumentException("Not enough victims, minimum " + MIN_GROUP_SIZE + " victims needed");
+                LOG.log(Level.INFO,"nbGroups : " + nbGroups);
+                LOG.log(Level.INFO,"ipAddress : " + ipAddress);
+                LOG.log(Level.INFO,"noPort : " + noPort);
             }
-            System.out.println("nbGroups : " + nbGroups);
-            reader.close();
 
-            return new Configs(nbGroups, messages, victims);
+            reader.close();
+            return new Configs(nbGroups, messages, victims, noPort, ipAddress);
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            LOG.log(Level.SEVERE, e.getMessage());
             System.exit(-1);
             return null;
         }
@@ -79,6 +95,8 @@ public class PrankApplication {
      * Create nbGroups from the Person in the loaded config
      */
     private void createGroups() {
+        if(isLogging)
+            LOG.log(Level.INFO,"Creating groups...");
         if (config != null) {
             // Index on the first person of a group
             int indexGroupDebut = 0;
@@ -105,6 +123,8 @@ public class PrankApplication {
      * Create mails from the messages and groups in the config files
      */
     private void createMails() {
+        if(isLogging)
+            LOG.log(Level.INFO,"Creating mails...");
         if (config != null) {
             createGroups();
             List<Message> msg = config.getMessages().getMessages();
@@ -134,17 +154,20 @@ public class PrankApplication {
     }
 
     private void sendMails() {
-        try (MailSender mailSender = new MailSender("localhost", 25)) {
+        if(isLogging)
+            LOG.log(Level.INFO,"Sending mails...");
+        try (MailSender mailSender = new MailSender(config.getIpAdress(), config.getNoPort())) {
             for (Mail mail : mails) {
                 mailSender.sendMail(mail);
             }
         } catch (Exception e) {
-            System.err.println("Error while sending mails");
+            LOG.log(Level.SEVERE, "Error while sending mails");
             System.exit(-1);
         }
     }
 
-    PrankApplication(String configs) {
+    PrankApplication(String configs, boolean logging) {
+        isLogging = logging;
         groups = new ArrayList<>();
         mails = new ArrayList<>();
         config = readConfigs(configs);
@@ -152,7 +175,7 @@ public class PrankApplication {
 
     public static void main(String[] args) {
         try {
-            PrankApplication pa = new PrankApplication(args[0]);
+            PrankApplication pa = new PrankApplication(args[0], true);
             pa.createMails();
             pa.sendMails();
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -164,10 +187,12 @@ public class PrankApplication {
 }
 
 class Configs {
-    public Configs(int nbGroups, Messages messages, Victims victims) {
+    public Configs(int nbGroups, Messages messages, Victims victims, int noPort, String ipAdress) {
         this.nbGroups = nbGroups;
         this.messages = messages;
         this.victims = victims;
+        this.noPort = noPort;
+        this.ipAdress = ipAdress;
     }
 
     public int getNbGroups() {
@@ -186,8 +211,18 @@ class Configs {
         return victims;
     }
 
+    public int getNoPort() {
+        return noPort;
+    }
+
+    public String getIpAdress() {
+        return ipAdress;
+    }
 
     private final int nbGroups;
     private final Messages messages;
     private final Victims victims;
+    private final int noPort;
+    private final String ipAdress;
+
 }

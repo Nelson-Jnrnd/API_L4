@@ -1,4 +1,6 @@
 {
+  "ip": "localhost",
+  "port": 25,
   "victims": [
     {
       "name": "Alain Terieur",
