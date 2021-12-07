@@ -79,10 +79,9 @@ In this repo we provide the necessary tools to run a Docker container that runs 
 
 For this you will need to install Docker (you can find installation instructions for your OS [here](https://docs.docker.com/get-docker/)).
 
-To run the Docker container, if you use Linux, you just have to open a terminal in the "docker" directory of this repo and type the command
+To run the Docker container, if you use Linux, you just have to open a terminal in the "docker" directory of this repo and run this script :
 
 ```bash
-chmod +x runMockMock.sh
 ./runMockMock.sh
 ```
 
