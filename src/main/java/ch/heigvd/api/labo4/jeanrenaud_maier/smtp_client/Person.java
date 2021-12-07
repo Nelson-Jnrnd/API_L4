@@ -1,21 +1,18 @@
 package ch.heigvd.api.labo4.jeanrenaud_maier.smtp_client;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NonNull;
+
+
+@AllArgsConstructor
 public class Person {
+    @Getter
+    @NonNull
     private final String name;
+    @Getter
+    @NonNull
     private final String mailAddress;
-
-    public String getName() {
-        return name;
-    }
-
-    public String getMailAddress() {
-        return mailAddress;
-    }
-
-    public Person(String name, String mailAddress) {
-        this.name = name;
-        this.mailAddress = mailAddress;
-    }
 
     @Override
     public String toString() {
