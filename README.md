@@ -49,7 +49,7 @@ To use this application it is needed to create a config file that will contain t
 
 Once you have the config file ready you can run the application with the following command :
 ```
-java -jar target/API_L4-1.0-SNAPSHOT.jar config.json
+java -jar target/API_L4-1.0-SNAPSHOT-launcher.jar config.json
 ```
 You need to specify the json config file as parameter when you run the application.
 
