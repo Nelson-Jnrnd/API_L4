@@ -11,6 +11,9 @@ import java.util.Scanner;
 
 /**
  * Implements a minimal SMTP client able to send mails to multiple recipients and with non ASCII characters.
+ * @see <a href="https://github.com/Nelson-Jnrnd/API_L4">https://github.com/Nelson-Jnrnd/API_L4</a>
+ * @author Damien Maier
+ * @author Nelson Jeanrenaud
  */
 public class MailSender implements AutoCloseable {
     private final Socket socket;
