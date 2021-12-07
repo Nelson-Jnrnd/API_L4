@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import lombok.extern.java.Log;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -23,7 +22,7 @@ import java.util.logging.Logger;
 public class PrankApplication {
 
     private static final int MIN_GROUP_SIZE = 3;
-    private static final Logger LOG = Logger.getLogger(PrankApplication.class.getName());;
+    private static final Logger LOG = Logger.getLogger(PrankApplication.class.getName());
     private final Configs config;
     private static final Random randomGenerator = new Random();
 
@@ -156,7 +155,7 @@ public class PrankApplication {
     private void sendMails() {
         if(isLogging)
             LOG.log(Level.INFO,"Sending mails...");
-        try (MailSender mailSender = new MailSender(config.getIpAdress(), config.getNoPort())) {
+        try (MailSender mailSender = new MailSender(config.getIpAddress(), config.getNoPort())) {
             for (Mail mail : mails) {
                 mailSender.sendMail(mail);
             }
@@ -187,12 +186,12 @@ public class PrankApplication {
 }
 
 class Configs {
-    public Configs(int nbGroups, Messages messages, Victims victims, int noPort, String ipAdress) {
+    public Configs(int nbGroups, Messages messages, Victims victims, int noPort, String ipAddress) {
         this.nbGroups = nbGroups;
         this.messages = messages;
         this.victims = victims;
         this.noPort = noPort;
-        this.ipAdress = ipAdress;
+        this.ipAddress = ipAddress;
     }
 
     public int getNbGroups() {
@@ -215,14 +214,14 @@ class Configs {
         return noPort;
     }
 
-    public String getIpAdress() {
-        return ipAdress;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
     private final int nbGroups;
     private final Messages messages;
     private final Victims victims;
     private final int noPort;
-    private final String ipAdress;
+    private final String ipAddress;
 
 }
