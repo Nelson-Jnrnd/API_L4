@@ -110,7 +110,7 @@ Then you can access the MockMock web interface by opening a web browser and typi
 
 ## Class Diagram
 
-![uml.png](API%20-%20L4%20-%20SMTP%20ba8be2a426a04c1ba896a85a9493fc4e/uml.png)
+![uml.png](figures/uml.png)
 
 ## Packages
 
@@ -126,13 +126,13 @@ This class implements a simple client able to send e-mails with SMTP using the c
 
 When an instance of this class is created, it opens a TCP connection to the server and starts the SMTP communication by reading the server initial message and sending the EHLO command.
 
-![Example of a TCP connection initiation from our application](API%20-%20L4%20-%20SMTP%20ba8be2a426a04c1ba896a85a9493fc4e/Untitled.png)
+![Example of a TCP connection initiation from our application](figures/ehlo_example.png)
 
 Example of a TCP connection initiation from our application
 
 To send an e-mail, the client uses the MAIL FROM, RCPT TO and DATA commands with appropriate parameters. It generates and sends the headers for the message and then it sends the message body.
 
-![Example a of messages exchanged between the server and the client when our application sends an e-mail](API%20-%20L4%20-%20SMTP%20ba8be2a426a04c1ba896a85a9493fc4e/Untitled%201.png)
+![Example a of messages exchanged between the server and the client when our application sends an e-mail](figures/mail_send_example.png)
 
 Example a of messages exchanged between the server and the client when our application sends an e-mail
 
