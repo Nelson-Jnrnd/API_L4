@@ -73,6 +73,8 @@ public class PrankApplication {
                 throw new IllegalArgumentException("noPort format in config file is incorrect");
             } else if(ipAddress == null) {
                 throw new IllegalArgumentException("ipAddress format in config file is incorrect");
+            } else if(victims.victims.size() / MIN_GROUP_SIZE < nbGroups){
+                throw new IllegalArgumentException("nbGroups value in config file is too high");
             }
 
             // Debug
