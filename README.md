@@ -109,6 +109,7 @@ Then you can access the MockMock web interface by opening a web browser and typi
 
 ## Class Diagram
 
+Here is a diagram of the most important classes of our application :
 ![uml.png](figures/uml.png)
 
 ## Packages
@@ -137,7 +138,7 @@ Example a of messages exchanged between the server and the client when our appli
 
 To allow correct displaying of non ASCII parameters in the "subject" header, the client uses an appropriate encoding as specified in RFC 2047. To allow correct displaying of non ASCII parameters in the message body, it encodes them with UTF-8 and uses an appropriate message header as specified in RFC 2045.
 
-Each time the client sends a commend, it checks that the server replies as expected. If an unexpected reply is received from the server, the client simply throws an exception.
+Each time the client sends a command, it checks that the server replies as expected. If an unexpected reply is received from the server, the client simply throws an exception.
 
 ### ServerReplyCodeScanner
 
@@ -166,3 +167,7 @@ To create the groups, the application will randomize the list of all the persons
 ### Mail creation
 
 For each groups, we use a random number generator to pick a message from the configs and a person from this group to be the sender, all the other persons are recepient of this email.
+
+
+# Complete Class Diagram
+![uml.png](figures/umlcomplete.png)
